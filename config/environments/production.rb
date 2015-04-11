@@ -3,7 +3,9 @@ set :stage, :production
 set :branch, "master"
 set :server_name, "www.dist-dev.cloudapp.net dist-dev.cloudapp.net"
 server 'dist-dev.cloudapp.net', user: 'deploy', roles: %w{web app db}, primary: true
-	
+set :password, ask('Server password:', nil).
+sudo chown deploy:deployers /var/www
+
 Rails.application.configure do
 
   config.i18n.enforce_available_locales = false
