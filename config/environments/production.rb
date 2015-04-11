@@ -6,6 +6,8 @@ set :stage, :production
 
 Rails.application.configure do
   
+  config.i18n.enforce_available_locales = false
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
