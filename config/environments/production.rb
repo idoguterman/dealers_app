@@ -1,15 +1,10 @@
 # Settings specified here will take precedence over those in config/application.rb.
 set :stage, :production
-
-  #Replace 127.0.0.1 with your server's IP address!
-  server '23.102.157.202', user: 'deploy', roles: %w{web app db}
-
+set :branch, "master"
+set :server_name, "www.dist-dev.cloudapp.net dist-dev.cloudapp.net"
+server 'dist-dev.cloudapp.net', user: 'deploy', roles: %w{web app db}, primary: true
+	
 Rails.application.configure do
-  
-  set :stage, :production
-
-  #Replace 127.0.0.1 with your server's IP address!
-  server '23.102.157.202', user: 'deploy', roles: %w{web app db}
 
   config.i18n.enforce_available_locales = false
 
