@@ -1,6 +1,11 @@
-Rails.application.configure do
-  # Settings specified here will take precedence over those in config/application.rb.
+# Settings specified here will take precedence over those in config/application.rb.
+set :stage, :production
 
+  #Replace 127.0.0.1 with your server's IP address!
+  server '23.102.157.202', user: 'deploy', roles: %w{web app}
+
+Rails.application.configure do
+  
   # Code is not reloaded between requests.
   config.cache_classes = true
 
@@ -13,8 +18,8 @@ Rails.application.configure do
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
-
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
+
   # Add `rack-cache` to your Gemfile before enabling this.
   # For large-scale production use, consider using a caching reverse proxy like
   # NGINX, varnish or squid.
