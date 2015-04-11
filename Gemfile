@@ -36,6 +36,7 @@ gem 'capistrano-rails', '~> 1.1.1'
 # Add this if you're using rbenv
 gem 'capistrano-rbenv', github: "capistrano/rbenv"
 
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
