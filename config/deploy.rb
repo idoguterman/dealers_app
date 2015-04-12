@@ -7,8 +7,7 @@ set :deploy_user, 'deploy'
 
 # setup repo details
 set :scm, :git
-set :repo_url, 'git@github.com:/idoguterman/dealers_app.git'
-set :repository, "git@github.com:/idoguterman/dealers_app.git"
+set :repo_url, 'https://idoguterman:Yaniv123@github.com/idoguterman/dealers_app.git'
 set :deploy_to, '/var/www/dealers_app'
 
 # setup rvm.
@@ -30,6 +29,12 @@ set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public
 # continue, see lib/capistrano/tasks/run_tests.cap
 set :tests, []
 
+set :ssh_options, {
+  forward_agent: true,
+  keys: [File.join(ENV["HOME"], ".ssh", "id_rsa")],
+  verbose: :debug,
+  user: fetch(:user)
+}
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
