@@ -5,6 +5,9 @@ lock '3.1.0'
 set :application, 'dealers_app'
 set :deploy_user, 'deploy'
 
+
+
+
 # setup repo details
 set :scm, :git
 set :repo_url, 'https://idoguterman:Yaniv123@github.com/idoguterman/dealers_app.git'
@@ -28,12 +31,12 @@ set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public
 # what specs should be run before deployment is allowed to
 # continue, see lib/capistrano/tasks/run_tests.cap
 set :tests, []
-
+set :user , 'deploy'
 set :ssh_options, {
   forward_agent: true,
   keys: [File.join(ENV["HOME"], ".ssh", "id_rsa")],
   verbose: :debug,
-  user: fetch(:user)
+  user: fetch(:deploy_user)
 }
 
 # Default branch is :master
@@ -67,6 +70,12 @@ set :ssh_options, {
 # set :keep_releases, 5
 
 namespace :deploy do
+
+task :whoami do
+  on roles(:all) do
+    execute :whoami
+  end
+end
 
   desc 'Restart application'
   task :restart do
