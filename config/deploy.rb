@@ -72,27 +72,16 @@ set :pty, true
 
 
 namespace :deploy do
-  task :start do ; end
-  task :stop do ; end
 
-  desc "Symlink shared config files"
-  task :symlink_config_files do
-    run "#{ sudo } ln -s #{ deploy_to }/shared/config/database.yml #{ current_path }/config/database.yml"
-  end
-
-  # NOTE: I don't use this anymore, but this is how I used to do it.
-  desc "Precompile assets after deploy"
-  task :precompile_assets do
-    run <<-CMD
-      cd #{ current_path } &&
-      bundle exec rake assets:precompile RAILS_ENV=#{ rails_env }
-    CMD
-  end
-
-  desc "Restart applicaiton"
+  desc "Restart application"
   task :restart do
-    run "touch #{ File.join(current_path, 'tmp', 'restart.txt') }"
+    on roles(:app), in: :sequence, wait: 5 do
+      execute :touch, release_path.join("tmp/restart.txt")
+    end
   end
+
+  after :finishing, "deploy:cleanup"
+
 end
 
 #after "deploy", "deploy:symlink_config_files"
