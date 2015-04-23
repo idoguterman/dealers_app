@@ -38,7 +38,7 @@ set :ssh_options, {
 }
 
 #default_run_options[:pty] = true
-server "example.com", :app, :web, :db, :primary => true
+server '23.102.157.202', user: 'deploy', roles: %w{web app db}, primary: true
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
