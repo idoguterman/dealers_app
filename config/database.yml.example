@@ -21,9 +21,7 @@ test:
   database: db/test.sqlite3
 
 production:
-  adapter:  mysql2
-  encoding: utf8
-  database: dealers_prod
-  username: root
-  password: yg5kra4gmZ
+  <<: *default
+  database: db/test.sqlite3
+
 
