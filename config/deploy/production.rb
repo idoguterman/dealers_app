@@ -15,7 +15,7 @@
 # something that quacks like a hash can be used to set
 # extended properties on the server.
 #set :server_name, "www.dist-dev.cloudapp.net "
-server '23.102.157.202', user: 'deploy', primary: true
+server '23.102.157.202', user: 'deploy', roles: %w{app}, primary: true
 set :password, ask('Server password:', nil)
 
 

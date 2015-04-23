@@ -95,3 +95,7 @@ end
   end
 
 end
+
+after "deploy", "deploy:restart"
+
+
