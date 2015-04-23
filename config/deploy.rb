@@ -3,12 +3,13 @@ lock '3.1.0'
 
 
 set :application, 'dealers_app'
-set :deploy_user, 'deploy'
+
 
 # setup repo details
 set :scm, :git
 set :repo_url, 'git@github.com:idoguterman/dealers_app.git'
 set :deploy_to, '/var/www/dealers_app'
+set :deploy_via, :copy
 
 # setup rvm.
 set :rbenv_type, :user
@@ -33,8 +34,11 @@ set :ssh_options, {
   forward_agent: true,
   keys: [File.join(ENV["HOME"], ".ssh", "id_rsa")],
   verbose: :debug,
-  user: fetch(:deploy_user)
+  user: fetch(:user)
 }
+
+default_run_options[:pty] = true
+server "example.com", :app, :web, :db, :primary => true
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
@@ -49,7 +53,7 @@ set :ssh_options, {
 # set :format, :pretty
 
 # Default value for :log_level is :debug
-# set :log_level, :debug
+set :log_level, :debug
 
 # Default value for :pty is false
 # set :pty, true
@@ -67,35 +71,31 @@ set :ssh_options, {
 # set :keep_releases, 5
 
 
-
 namespace :deploy do
+  task :start do ; end
+  task :stop do ; end
 
-task :whoami do
-  on roles(:all) do
-    execute :whoami
+  desc "Symlink shared config files"
+  task :symlink_config_files do
+    run "#{ sudo } ln -s #{ deploy_to }/shared/config/database.yml #{ current_path }/config/database.yml"
   end
-end
 
-  desc 'Restart application'
+  # NOTE: I don't use this anymore, but this is how I used to do it.
+  desc "Precompile assets after deploy"
+  task :precompile_assets do
+    run <<-CMD
+      cd #{ current_path } &&
+      #{ sudo } bundle exec rake assets:precompile RAILS_ENV=#{ rails_env }
+    CMD
+  end
+
+  desc "Restart applicaiton"
   task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      execute :touch, release_path.join('tmp/restart.txt')
-    end
+    run "#{ try_sudo } touch #{ File.join(current_path, 'tmp', 'restart.txt') }"
   end
-
-  after :publishing, :restart
-
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
-    end
-  end
-
 end
 
+after "deploy", "deploy:symlink_config_files"
 after "deploy", "deploy:restart"
-
+after "deploy", "deploy:cleanup"
 

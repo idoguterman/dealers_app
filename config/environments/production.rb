@@ -6,7 +6,7 @@ set :branch, "master"
 set :password, ask('Server password:', nil).
 
 
-Rails.application.configure do
+DealersApp::Application.configure do
 
   config.i18n.enforce_available_locales = false
 
