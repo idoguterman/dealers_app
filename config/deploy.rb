@@ -5,9 +5,6 @@ lock '3.1.0'
 set :application, 'dealers_app'
 set :deploy_user, 'deploy'
 
-
-
-
 # setup repo details
 set :scm, :git
 set :repo_url, 'https://idoguterman:Yaniv123@github.com/idoguterman/dealers_app.git'

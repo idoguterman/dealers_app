@@ -14,7 +14,7 @@ role :db,  %w{deploy@23.102.157.202}
 # definition into the server list. The second argument
 # something that quacks like a hash can be used to set
 # extended properties on the server.
-set :server_name, "www.dist-dev.cloudapp.net "
+#set :server_name, "www.dist-dev.cloudapp.net "
 server 'dist-dev.cloudapp.net', user: 'deploy', roles: %w{web app db}, primary: true
 set :password, ask('Server password:', nil)
 
