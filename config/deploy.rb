@@ -7,7 +7,7 @@ set :deploy_user, 'deploy'
 
 # setup repo details
 set :scm, :git
-set :repo_url, 'https://idoguterman:Yaniv123@github.com/idoguterman/dealers_app.git'
+set :repo_url, 'git@github.com:idoguterman/dealers_app.git'
 set :deploy_to, '/var/www/dealers_app'
 
 # setup rvm.
