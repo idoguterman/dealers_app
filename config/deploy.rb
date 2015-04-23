@@ -85,13 +85,13 @@ namespace :deploy do
   task :precompile_assets do
     run <<-CMD
       cd #{ current_path } &&
-      #{ sudo } bundle exec rake assets:precompile RAILS_ENV=#{ rails_env }
+      bundle exec rake assets:precompile RAILS_ENV=#{ rails_env }
     CMD
   end
 
   desc "Restart applicaiton"
   task :restart do
-    run "#{ try_sudo } touch #{ File.join(current_path, 'tmp', 'restart.txt') }"
+    run "touch #{ File.join(current_path, 'tmp', 'restart.txt') }"
   end
 end
 
