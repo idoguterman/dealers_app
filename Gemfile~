@@ -30,7 +30,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'unicorn'
 
 
-gem 'mysql2'
+gem 'mysql2' , '~> 0.3.18'
+
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
