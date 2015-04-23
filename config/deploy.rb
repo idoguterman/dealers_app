@@ -37,7 +37,7 @@ set :ssh_options, {
   user: fetch(:user)
 }
 
-default_run_options[:pty] = true
+#default_run_options[:pty] = true
 server "example.com", :app, :web, :db, :primary => true
 
 # Default branch is :master
@@ -56,7 +56,7 @@ server "example.com", :app, :web, :db, :primary => true
 set :log_level, :debug
 
 # Default value for :pty is false
-# set :pty, true
+set :pty, true
 
 # Default value for :linked_files is []
 # set :linked_files, %w{config/database.yml}
