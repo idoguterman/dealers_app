@@ -4,9 +4,9 @@
 # server in each group is considered to be the first
 # unless any hosts have the primary property set.
 # Don't declare `role :all`, it's a meta role
-#role :app, %w{deploy@23.102.157.202}
-#role :web, %w{deploy@23.102.157.202}
-#role :db,  %w{deploy@23.102.157.202}
+role :app, %w{deploy@23.102.157.202}
+role :web, %w{deploy@23.102.157.202}
+role :db,  %w{deploy@23.102.157.202}
 
 # Extended Server Syntax
 # ======================
@@ -15,7 +15,7 @@
 # something that quacks like a hash can be used to set
 # extended properties on the server.
 #set :server_name, "www.dist-dev.cloudapp.net "
-server '23.102.157.202', user: 'deploy', roles: %w{app}, primary: true
+server '23.102.157.202', user: 'deploy', roles: %w{web}, primary: true
 set :password, ask('Server password:', nil)
 
 
