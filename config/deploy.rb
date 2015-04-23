@@ -19,7 +19,7 @@ set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 
 # how many old releases do we want to keep
 set :keep_releases, 5
-
+set :bundle_flags,    ""
 # files we want symlinking to specific entries in shared.
 set :linked_files, %w{config/database.yml}
 
