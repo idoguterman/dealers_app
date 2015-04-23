@@ -3,7 +3,7 @@ lock '3.1.0'
 
 
 set :application, 'dealers_app'
-
+set :rails_env, "production"
 
 # setup repo details
 set :scm, :git
