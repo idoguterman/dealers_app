@@ -35,10 +35,13 @@ gem 'capistrano-rails', '~> 1.1.1'
 
 # Add this if you're using rbenv
 gem 'capistrano-rbenv', github: "capistrano/rbenv"
-gem 'mysql2'
-
+#gem 'mysql2'
+gem 'pg', '~> 0.18.1'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+group :production do
+  gem 'passenger'
+end
 
 group :development, :test do
 
